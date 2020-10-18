@@ -4,13 +4,9 @@
       <div class="card">
         <label class="block">
           <span class="form-label mb-2">Select a date</span>
-          <input
-            :value="date"
-            class="form-input"
-            type="text"
-            id="datepicker"
-            placeholder="YYYY-MM-DD"
-          />
+          <date-picker v-model="date"></date-picker>
+          <hr />
+          <date-picker v-model="date2"></date-picker>
         </label>
       </div>
     </div>
@@ -18,24 +14,20 @@
 </template>
 
 <script>
-/* eslint-disable no-unused-vars */
-import Pikaday from "pikaday"
+import DatePicker from "./components/DatePicker"
 
 export default {
-  data() {
-    return {
-      date: "2020-10-18"
-    }
+  name: "App",
+
+  components: {
+    DatePicker
   },
 
-  mounted() {
-    const picker = new Pikaday({
-      field: document.getElementById("datepicker"),
-      format: "YYYY-MM-DD",
-      onSelect: () => {
-        this.date = picker.toString()
-      }
-    })
+  data() {
+    return {
+      date: "2020-10-18",
+      date2: "1992-11-12"
+    }
   }
 }
 </script>
