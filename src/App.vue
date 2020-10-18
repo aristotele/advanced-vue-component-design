@@ -6,7 +6,11 @@
           <span class="form-label mb-2">Select a date</span>
           <date-picker v-model="date"></date-picker>
           <hr />
-          <date-picker v-model="date2"></date-picker>
+          <date-picker
+            v-model="date2"
+            format="DD/MM/YYYY"
+            :options="{ showWeekNumber: true }"
+          ></date-picker>
         </label>
       </div>
     </div>
@@ -26,7 +30,7 @@ export default {
   data() {
     return {
       date: "2020-10-18",
-      date2: "1992-11-12"
+      date2: ""
     }
   }
 }
