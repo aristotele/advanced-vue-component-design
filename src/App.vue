@@ -7,8 +7,9 @@
 </template>
 
 <script>
+import UserSettingsForm from "./components/UserSettingsForm"
 export default {
-  components: {}
+  components: { UserSettingsForm }
 }
 </script>
 
