@@ -1,9 +1,18 @@
 <template>
   <div class="min-h-screen bg-grey-darker p-8">
     <div class="max-w-sm mx-auto">
-      <base-select v-model="selectedColor" :options="colors"></base-select>
+      <!-- <base-select v-model="selectedColor" :options="colors"></base-select> -->
 
       <hr />
+
+      <select class="form-input" id="select2">
+        <option
+          v-for="color in colors"
+          :key="color.id"
+          :value="color.id"
+          v-text="color.value"
+        ></option>
+      </select>
     </div>
   </div>
 </template>
@@ -14,12 +23,10 @@ import $ from "jquery"
 import select2 from "select2"
 import "select2/dist/css/select2.min.css"
 
-import BaseSelect from "./assets/js/components/BaseSelect"
-
 export default {
   name: "App",
 
-  components: { BaseSelect },
+  components: {},
 
   data() {
     return {
@@ -42,13 +49,22 @@ export default {
   mounted() {
     var vm = this
 
-    // $("#select2")
-    //   .select2()
-    //   .on("change", function() {
-    //     // console.log(this.value)
-    //     vm.selectedColor = this.value
-    //     // vm.$emit("input", this.value)
-    //   })
+    $("#select2")
+      .select2()
+      .on("change", function() {
+        console.log("@mounted - onChange", this.value)
+        vm.selectedColor = this.value
+        // vm.$emit("input", this.value)
+      })
+  },
+
+  watch: {
+    selectedColor: function(value) {
+      console.log("watch", value)
+      $("#select2")
+        .val(value)
+        .trigger("change")
+    }
   }
 }
 </script>
