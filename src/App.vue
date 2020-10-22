@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'modal-open': modalOpen }">
+  <div class="ehi">
     <div class="p-8">
       <div class="max-w-sm mx-auto">
         <div class="p-8 mb-4 text-center">
@@ -117,6 +117,7 @@
     <announcement-modal
       :show="modalOpen"
       @close="modalOpen = false"
+      :prevent-background-scrolling="preventScrolling"
     ></announcement-modal>
   </div>
 </template>
@@ -131,7 +132,8 @@ export default {
 
   data() {
     return {
-      modalOpen: false
+      modalOpen: true,
+      preventScrolling: true
     }
   }
 }
