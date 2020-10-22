@@ -117,8 +117,8 @@
     <announcement-modal
       :show="modalOpen"
       @close="modalOpen = false"
-      :prevent-background-scrolling="preventScrolling"
     ></announcement-modal>
+    <!-- :prevent-background-scrolling="preventScrolling" -->
   </div>
 </template>
 
@@ -132,8 +132,8 @@ export default {
 
   data() {
     return {
-      modalOpen: true,
-      preventScrolling: true
+      modalOpen: true
+      // preventScrolling: true
     }
   }
 }

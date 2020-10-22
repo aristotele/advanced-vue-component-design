@@ -25,12 +25,6 @@ export default {
     preventBackgroundScrolling: { default: true }
   },
 
-  // mounted() {
-  //   document.querySelector(".ehi").style.setProperty("background-color", "red")
-  // 	document.querySelector(".ehi").style.setProperty("overflow", "hidden")
-  //   document.querySelector(".ehi").style.setProperty("height", "200px")
-  // },
-
   created() {
     const escapeHandler = e => {
       if (e.key === "Escape" && this.show) {
@@ -46,23 +40,26 @@ export default {
   },
 
   watch: {
-    show(show) {
-      if (show) {
-        this.preventBackgroundScrolling &&
-          document.body.style.setProperty("overflow", "hidden")
-      } else {
-        this.preventBackgroundScrolling &&
-          document.body.style.removeProperty("overflow")
-      }
-    },
-
-    preventBackgroundScrolling(prevent) {
-      if (prevent) {
-        document.body.style.setProperty("overflow", "hidden")
-      } else {
-        document.body.style.removeProperty("overflow")
+    show: {
+      immediate: true,
+      handler: function(show) {
+        if (show) {
+          this.preventBackgroundScrolling &&
+            document.body.style.setProperty("overflow", "hidden")
+        } else {
+          this.preventBackgroundScrolling &&
+            document.body.style.removeProperty("overflow")
+        }
       }
     }
+
+    // preventBackgroundScrolling(prevent) {
+    //   if (prevent) {
+    //     document.body.style.setProperty("overflow", "hidden")
+    //   } else {
+    //     document.body.style.removeProperty("overflow")
+    //   }
+    // }
   },
 
   methods: {
