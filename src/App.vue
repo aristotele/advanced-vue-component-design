@@ -5,65 +5,32 @@
 
       <hr />
 
-      <select class="form-input" id="select2">
-        <option
-          v-for="color in colors"
-          :key="color.id"
-          :value="color.id"
-          v-text="color.value"
-        ></option>
-      </select>
+      <base-select2
+        v-model.number="selectedColor"
+        :options="colors"
+      ></base-select2>
     </div>
   </div>
 </template>
 
 <script>
 /* eslint-disable no-unused-vars */
-import $ from "jquery"
-import select2 from "select2"
-import "select2/dist/css/select2.min.css"
+
+import BaseSelect2 from "./assets/js/components/BaseSelect2"
 
 export default {
   name: "App",
 
-  components: {},
+  components: { BaseSelect2 },
 
   data() {
     return {
-      selectedColor: "",
+      selectedColor: 1,
       colors: [
         { id: 1, value: "red" },
         { id: 2, value: "green" },
         { id: 3, value: "orange" }
       ]
-    }
-  },
-
-  methods: {
-    triggerSelectInput(event) {
-      // console.log("event", event)
-      // this.selectedColor = event
-    }
-  },
-
-  mounted() {
-    var vm = this
-
-    $("#select2")
-      .select2()
-      .on("change", function() {
-        console.log("@mounted - onChange", this.value)
-        vm.selectedColor = this.value
-        // vm.$emit("input", this.value)
-      })
-  },
-
-  watch: {
-    selectedColor: function(value) {
-      console.log("watch", value)
-      $("#select2")
-        .val(value)
-        .trigger("change")
     }
   }
 }
