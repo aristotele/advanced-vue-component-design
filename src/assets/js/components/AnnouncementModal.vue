@@ -23,17 +23,17 @@ export default {
   props: ["show"],
 
   created() {
-    this.escapeHandler = e => {
+    const escapeHandler = e => {
       if (e.key === "Escape" && this.show) {
         this.dismiss()
       }
     }
 
-    document.addEventListener("keydown", this.escapeHandler)
-  },
+    document.addEventListener("keydown", escapeHandler)
 
-  destroyed() {
-    document.removeEventListener("keydown", this.escapeHandler)
+    this.$once("hook:destroyed", () => {
+      document.removeEventListener("keydown", escapeHandler)
+    })
   },
 
   methods: {
