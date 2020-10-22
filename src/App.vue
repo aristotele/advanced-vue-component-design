@@ -5,10 +5,15 @@
 
       <hr />
 
-      <base-select2
-        v-model.number="selectedColor"
-        :options="colors"
-      ></base-select2>
+      <base-select2 v-model.number="selectedColor" :options="colors">
+        <option disabled value="0">Select one</option>
+      </base-select2>
+
+      <hr />
+
+      <base-select2 v-model.number="selectedColor" :options="colors">
+        <option disabled value="0">Select one</option>
+      </base-select2>
     </div>
   </div>
 </template>
@@ -27,9 +32,10 @@ export default {
     return {
       selectedColor: 1,
       colors: [
-        { id: 1, value: "red" },
-        { id: 2, value: "green" },
-        { id: 3, value: "orange" }
+        // ! need specific data format https://select2.org/data-sources/formats
+        { id: 1, text: "red" },
+        { id: 2, text: "green" },
+        { id: 3, text: "orange" }
       ]
     }
   }

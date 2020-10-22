@@ -1,11 +1,6 @@
 <template>
-  <select class="form-input" id="select2">
-    <option
-      v-for="option in options"
-      :key="option.id"
-      :value="option.id"
-      v-text="option.value"
-    ></option>
+  <select class="w-full" ref="select2">
+    <slot></slot>
   </select>
 </template>
 
@@ -21,8 +16,9 @@ export default {
   mounted() {
     var vm = this
 
-    $("#select2")
-      .select2()
+    $(this.$el)
+      .select2({ data: this.options })
+      .val(this.value)
       .on("change", function() {
         // like @input
         vm.$emit("input", this.value)
@@ -30,20 +26,30 @@ export default {
   },
 
   watch: {
+    // need for non-UI (dom) change e.g. programmatic changes (or from vue dev-tools)
     value(value) {
       console.log("watch", value)
 
-      $("#select2")
+      $(this.$el)
         .val(value)
         .trigger("change")
     },
 
+    // refresh data options (e.g on fresh data from ajax response)
     options(options) {
       // this is jquery
       $(this.$el)
         .empty()
         .select2({ data: options })
     }
+  },
+
+  destroyed() {
+    // unbind any Select2 event explicitly bind ('change' in our case)
+    // https://select2.org/programmatic-control/methods#event-unbinding
+    $(this.$el)
+      .off()
+      .select2("destroy")
   }
 }
 </script>
