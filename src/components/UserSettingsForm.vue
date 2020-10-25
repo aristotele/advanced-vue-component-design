@@ -20,11 +20,15 @@
       >
         Delete Account
       </button>
-      <confirm-delete-modal
-        :show="confirmDeleteModalOpen"
-        @close="confirmDeleteModalOpen = false"
-        :account-id="accountId"
-      ></confirm-delete-modal>
+
+      <portal to="modals">
+        <confirm-delete-modal
+          :show="confirmDeleteModalOpen"
+          @close="confirmDeleteModalOpen = false"
+          :account-id="accountId"
+        ></confirm-delete-modal>
+      </portal>
+
       <button type="button" class="btn btn-blue">Update Settings</button>
     </div>
   </form>
