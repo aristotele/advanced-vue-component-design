@@ -12,8 +12,15 @@
         <toggle-component v-model="receiveNewsletter"></toggle-component>
       </div>
     </div>
-    <div class="text-right">
-      <button type="submit" class="btn btn-blue">Update Settings</button>
+    <div class="flex justify-between">
+      <button
+        class="text-red hover:underline"
+        type="button"
+        @click="$emit('open:confirm-delete-modal')"
+      >
+        Delete Account
+      </button>
+      <button type="button" class="btn btn-blue">Update Settings</button>
     </div>
   </form>
 </template>
