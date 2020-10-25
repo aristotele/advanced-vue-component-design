@@ -12,14 +12,19 @@
         <toggle-component v-model="receiveNewsletter"></toggle-component>
       </div>
     </div>
-    <div class="flex justify-between">
+    <div class="flex justify-between" style="opacity: 0.5;">
       <button
         class="text-red hover:underline"
         type="button"
-        @click="$emit('open:confirm-delete-modal')"
+        @click="confirmDeleteModalOpen = true"
       >
         Delete Account
       </button>
+      <confirm-delete-modal
+        :show="confirmDeleteModalOpen"
+        @close="confirmDeleteModalOpen = false"
+        :account-id="accountId"
+      ></confirm-delete-modal>
       <button type="button" class="btn btn-blue">Update Settings</button>
     </div>
   </form>
@@ -27,18 +32,23 @@
 
 <script>
 import ToggleComponent from "./ToggleComponent"
+import ConfirmDeleteModal from "./ConfirmDeleteModal"
 
 export default {
   name: "UserSettingsForm",
 
+  props: ["accountId"],
+
   components: {
-    ToggleComponent
+    ToggleComponent,
+    ConfirmDeleteModal
   },
 
   data() {
     return {
       email: "",
-      receiveNewsletter: false
+      receiveNewsletter: false,
+      confirmDeleteModalOpen: false
     }
   },
 
