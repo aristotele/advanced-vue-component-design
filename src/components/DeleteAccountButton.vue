@@ -6,7 +6,7 @@
   >
     Delete Account
 
-    <portal to="modals">
+    <portal to="modals" v-if="confirmDeleteModalOpen">
       <confirm-delete-modal
         :show="confirmDeleteModalOpen"
         @close="confirmDeleteModalOpen = false"
