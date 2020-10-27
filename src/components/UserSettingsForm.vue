@@ -13,22 +13,7 @@
       </div>
     </div>
     <div class="flex justify-between" style="opacity: 0.5;">
-      <button
-        class="text-red hover:underline"
-        type="button"
-        @click="confirmDeleteModalOpen = true"
-      >
-        Delete Account
-      </button>
-
-      <portal to="modals">
-        <confirm-delete-modal
-          :show="confirmDeleteModalOpen"
-          @close="confirmDeleteModalOpen = false"
-          :account-id="accountId"
-        ></confirm-delete-modal>
-      </portal>
-
+      <delete-account-button :account-id="accountId"></delete-account-button>
       <button type="button" class="btn btn-blue">Update Settings</button>
     </div>
   </form>
@@ -36,7 +21,7 @@
 
 <script>
 import ToggleComponent from "./ToggleComponent"
-import ConfirmDeleteModal from "./ConfirmDeleteModal"
+import DeleteAccountButton from "./DeleteAccountButton"
 
 export default {
   name: "UserSettingsForm",
@@ -45,14 +30,13 @@ export default {
 
   components: {
     ToggleComponent,
-    ConfirmDeleteModal
+    DeleteAccountButton
   },
 
   data() {
     return {
       email: "",
-      receiveNewsletter: false,
-      confirmDeleteModalOpen: false
+      receiveNewsletter: false
     }
   },
 
