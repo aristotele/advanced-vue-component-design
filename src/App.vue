@@ -6,14 +6,15 @@
       </div>
     </div>
 
-    <!-- without v-if this modal will overwrite the confirmDeleteModal declared above inside: user-setting-form > delete-account-button  -->
-    <!-- this approach is usefull when only 1 instance of: modal, dropdown, tooltip should be shown at time -->
-    <portal to="modals" v-if="showAnnouncement">
-      <announcement-modal
-        :show="showAnnouncement"
-        @close="showAnnouncement = false"
-      ></announcement-modal>
-    </portal>
+    <modal-dialog :show="showCustomModal" @close="showCustomModal = false">
+      <h1>Some text</h1>
+      <button class="button bg-red p-2 rounded text-white">ehi</button>
+    </modal-dialog>
+
+    <announcement-modal
+      :show="showAnnouncement"
+      @close="showAnnouncement = false"
+    ></announcement-modal>
 
     <!-- Need to be at the end of the docuemnt, outside, otherwise will inherite opacity -->
     <portal-target name="modals"></portal-target>
@@ -27,14 +28,16 @@
 <script>
 import UserSettingsForm from "./components/UserSettingsForm"
 import AnnouncementModal from "./components/AnnouncementModal"
+import ModalDialog from "./components/ModalDialog"
 
 export default {
-  components: { UserSettingsForm, AnnouncementModal },
+  components: { UserSettingsForm, AnnouncementModal, ModalDialog },
 
   data() {
     return {
       accountId: 7,
-      showAnnouncement: true
+      showAnnouncement: false,
+      showCustomModal: true
     }
   }
 }
