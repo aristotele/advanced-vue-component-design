@@ -13,12 +13,28 @@
           alt=""
         />
         <div>
-          <!-- with props -->
+          <!--
+						with function props.
+						passing directly the local object
+						-->
           <div class="font-bold">
-            {{ pseudoSlot({ ehi: contact }) }}
+            {{ functionProp(contact) }}
           </div>
 
-          <!-- with scoped-slot -->
+          <!--
+						with function props emulating scoped-slot.
+						passing the local object as key-value { key: localObject }
+						so the object to use up in the parent is wrapped by an object
+						-->
+          <div class="font-bold">
+            {{ pseudoSlotScope({ ehi: contact }) }}
+          </div>
+
+          <!--
+						with scoped-slot.
+						passing the local object as key-value { key: localObject }
+						so the object to use up in the parent is wrapped by an object
+						-->
           <div class="font-bold">
             <slot :my-slot-prop="contact"></slot>
           </div>
@@ -36,7 +52,7 @@
 export default {
   name: "ContactList",
 
-  props: ["pseudoSlot"],
+  props: ["functionProp", "pseudoSlotScope"],
 
   data() {
     return {

@@ -1,9 +1,20 @@
 <template>
   <div class="min-h-screen bg-grey-darker p-8">
     <div class="max-w-sm mx-auto">
-      <!-- here I'm defining the function to be exectuted in child -->
+      <!--
+        The Goal is: use data and variables defined in the child <contact-list> to make something here, in the parent <App>
+
+        Using props: define function to be exectuted in child component;
+        works but cannot manipulate html
+        <contact-list :pseudo-slot="({ ehi }) => ehi.name.first">
+
+        Using scoped Slot: it's the same as using (function) props AND allow html manipulation
+      -->
       <contact-list
-        :pseudo-slot="ObjWrappingSlotProp => ObjWrappingSlotProp.ehi.name.first"
+        :function-prop="ehi => ehi.name.first"
+        :pseudo-slot-scope="
+          ObjWrappingSlotProp => ObjWrappingSlotProp.ehi.name.first
+        "
       >
         <a
           slot-scope="ObjWrappingSlotProp"
