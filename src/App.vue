@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-grey-darker p-8">
     <div class="max-w-sm mx-auto">
-      <contact-list :pseudo-slot="() => 'hello' + 'world'">
+      <contact-list :pseudo-slot="contact => contact.name.first">
         <!-- {{ contact.name.first }} -->
       </contact-list>
     </div>

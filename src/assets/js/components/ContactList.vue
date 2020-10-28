@@ -14,7 +14,7 @@
         />
         <div>
           <div class="font-bold">
-            {{ pseudoSlot() }}
+            {{ pseudoSlot(contact) }}
             <!-- <slot></slot> -->
             <!-- {{ contact.name.first }} {{ contact.name.last }} -->
           </div>
