@@ -13,11 +13,17 @@
           alt=""
         />
         <div>
+          <!-- with props -->
           <div class="font-bold">
-            {{ pseudoSlot(contact) }}
-            <!-- <slot></slot> -->
-            <!-- {{ contact.name.first }} {{ contact.name.last }} -->
+            {{ pseudoSlot({ ehi: contact }) }}
+            <!-- contact.name.first -->
           </div>
+
+          <!-- with scoped-slot -->
+          <div class="font-bold">
+            <slot :my-slot-prop="contact"></slot>
+          </div>
+
           <div class="text-grey-dark">
             {{ contact.email }}
           </div>
@@ -29,6 +35,8 @@
 
 <script>
 export default {
+  name: "ContactList",
+
   props: ["pseudoSlot"],
 
   data() {
