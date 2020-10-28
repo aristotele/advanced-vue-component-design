@@ -12,15 +12,10 @@
       -->
       <contact-list
         :function-prop="ehi => ehi.name.first"
-        :pseudo-slot-scope="
-          ObjWrappingSlotProp => ObjWrappingSlotProp.ehi.name.first
-        "
+        :pseudo-slot-scope="({ ehi }) => ehi.name.first"
       >
-        <a
-          slot-scope="ObjWrappingSlotProp"
-          :href="`/contacts/${ObjWrappingSlotProp.mySlotProp.id}`"
-        >
-          {{ ObjWrappingSlotProp.mySlotProp.name.first }}
+        <a slot-scope="{ mySlotProp }" :href="`/contacts/${mySlotProp.id}`">
+          {{ mySlotProp.name.first }}
         </a>
       </contact-list>
     </div>
