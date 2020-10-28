@@ -14,7 +14,9 @@
         />
         <div>
           <div class="font-bold">
-            {{ contact.name.first }} {{ contact.name.last }}
+            {{ pseudoSlot() }}
+            <!-- <slot></slot> -->
+            <!-- {{ contact.name.first }} {{ contact.name.last }} -->
           </div>
           <div class="text-grey-dark">
             {{ contact.email }}
@@ -27,6 +29,8 @@
 
 <script>
 export default {
+  props: ["pseudoSlot"],
+
   data() {
     return {
       contacts: []
