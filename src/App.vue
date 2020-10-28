@@ -5,10 +5,12 @@
       <contact-list
         :pseudo-slot="ObjWrappingSlotProp => ObjWrappingSlotProp.ehi.name.first"
       >
-        <!-- {{ contact.name.first }} -->
-        <template slot-scope="ObjWrappingSlotProp">
+        <a
+          slot-scope="ObjWrappingSlotProp"
+          :href="`/contacts/${ObjWrappingSlotProp.mySlotProp.id}`"
+        >
           {{ ObjWrappingSlotProp.mySlotProp.name.first }}
-        </template>
+        </a>
       </contact-list>
     </div>
   </div>

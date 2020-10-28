@@ -16,7 +16,6 @@
           <!-- with props -->
           <div class="font-bold">
             {{ pseudoSlot({ ehi: contact }) }}
-            <!-- contact.name.first -->
           </div>
 
           <!-- with scoped-slot -->
