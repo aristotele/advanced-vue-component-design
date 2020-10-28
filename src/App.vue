@@ -7,16 +7,17 @@
         Using props: define function to be exectuted in child component;
         works but cannot manipulate html
         <contact-list :pseudo-slot="({ ehi }) => ehi.name.first">
-
-        Using scoped Slot: it's the same as using (function) props AND allow html manipulation
       -->
       <contact-list
         :function-prop="ehi => ehi.name.first"
-        :pseudo-slot-scope="({ ehi }) => ehi.name.first"
+        :pseudo-slot-scope="objWrapper => objWrapper.dummyKey.name.first"
       >
-        <a slot-scope="{ mySlotProp }" :href="`/contacts/${mySlotProp.id}`">
-          {{ mySlotProp.name.first }}
-        </a>
+        <!--
+        Using scoped Slot: it's the same as using (function) props AND allow html manipulation
+       -->
+        <template slot-scope="objWrapper">
+          {{ objWrapper.mySlotProp.name.first }}
+        </template>
       </contact-list>
     </div>
   </div>

@@ -16,6 +16,8 @@
           <!--
 						with function props.
 						passing directly the local object
+						Invoke functionProp using local variable `contact` as actual parameter
+						for the function defined in <App> who has `ehi` as formal parameter
 						-->
           <div class="font-bold">
             {{ functionProp(contact) }}
@@ -23,17 +25,18 @@
 
           <!--
 						with function props emulating scoped-slot.
-						passing the local object as key-value { key: localObject }
-						so the object to use up in the parent is wrapped by an object
+						Invoke pseudoSlotScope passing the local object as key-value { dummykey: localObject }
+						This simulate they way scoped-slot works { mySlotProp: contact } (look below)
 						-->
           <div class="font-bold">
-            {{ pseudoSlotScope({ ehi: contact }) }}
+            {{ pseudoSlotScope({ dummyKey: contact }) }}
           </div>
 
           <!--
 						with scoped-slot.
-						passing the local object as key-value { key: localObject }
-						so the object to use up in the parent is wrapped by an object
+						passing the local object as key-value { mySlotProp: contact }
+
+						This way I can access <contact-list> contact variable inside parent component <App>
 						-->
           <div class="font-bold">
             <slot :my-slot-prop="contact"></slot>
