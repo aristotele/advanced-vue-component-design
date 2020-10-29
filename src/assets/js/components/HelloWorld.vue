@@ -1,20 +1,15 @@
-<script>
-export default {
-  props: ["tag"],
+<template>
+  <primary-button>
+    Hello World
+  </primary-button>
+</template>
 
-  render(createElement) {
-    return createElement(
-      this.tag,
-      {
-        attrs: {
-          class: "btn btn-blue"
-        },
-        on: {
-          click: () => alert("clicked")
-        }
-      },
-      "Hello World"
-    )
+<script>
+import PrimaryButton from "./PrimaryButton"
+
+export default {
+  components: {
+    PrimaryButton
   }
 }
 </script>
