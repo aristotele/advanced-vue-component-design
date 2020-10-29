@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-grey-darker p-8">
-    <div class="max-w-sm mx-auto bg-white">
-      <hello-world></hello-world>
+    <div class="max-w-sm mx-auto bg-white h-screen">
+      <hello-world tag="a"></hello-world>
     </div>
   </div>
 </template>

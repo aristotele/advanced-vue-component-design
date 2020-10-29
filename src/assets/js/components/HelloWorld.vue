@@ -1,11 +1,16 @@
 <script>
 export default {
+  props: ["tag"],
+
   render(createElement) {
     return createElement(
-      "span",
+      this.tag,
       {
         attrs: {
-          class: "text-blue text-xl font-bold"
+          class: "btn btn-blue"
+        },
+        on: {
+          click: () => alert("clicked")
         }
       },
       "Hello World"
