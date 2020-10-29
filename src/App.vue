@@ -1,7 +1,9 @@
 <template>
   <div class="min-h-screen bg-grey-darker p-8">
     <div class="max-w-sm mx-auto bg-white h-screen">
-      <hello-world></hello-world>
+      <div class="flex justify-center pt-8">
+        <hello-world></hello-world>
+      </div>
     </div>
   </div>
 </template>

@@ -1,24 +1,23 @@
 <script>
-import PrimaryButton from "./PrimaryButton"
+import ToggleInput from "./ToggleInput"
 
 export default {
-  components: {
-    PrimaryButton
+  data() {
+    return {
+      isToggled: true
+    }
   },
 
   render(createElement) {
-    return createElement(
-      PrimaryButton,
-      {
-        nativeOn: {
-          click: () => alert("clicked!")
-          // click() {
-          //   alert("clicked")
-          // }
-        }
+    // By declaring the prop 'value' and 'input' event we're simulating v-model in the render function
+    return createElement(ToggleInput, {
+      props: {
+        value: this.isToggled
       },
-      "Hello World"
-    )
+      on: {
+        input: newValue => (this.isToggled = newValue)
+      }
+    })
   }
 }
 </script>
