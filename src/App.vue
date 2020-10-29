@@ -1,14 +1,18 @@
 <template>
   <div class="min-h-screen bg-grey-darker p-8">
-    <div class="max-w-sm mx-auto"></div>
+    <div class="max-w-sm mx-auto bg-white">
+      <hello-world></hello-world>
+    </div>
   </div>
 </template>
 
 <script>
+import HelloWorld from "./assets/js/components/HelloWorld"
+
 export default {
   name: "App",
 
-  components: {}
+  components: { HelloWorld }
 }
 </script>
 
