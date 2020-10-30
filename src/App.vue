@@ -9,27 +9,7 @@
               <div v-if="loading">
                 Loading ...
               </div>
-              <div v-else>
-                <div
-                  v-for="contact in contacts"
-                  :key="contact.id"
-                  class="flex items-center spaced-y-6"
-                >
-                  <img
-                    :src="contact.picture.medium"
-                    class="h-12 w-12 rounded-full block mr-2"
-                    alt=""
-                  />
-                  <div>
-                    <div class="font-bold">
-                      {{ contact.name.first }} {{ contact.name.last }}
-                    </div>
-                    <div class="text-grey-dark">
-                      {{ contact.email }}
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <contact-list v-else :contacts="contacts"></contact-list>
             </div>
           </template>
         </fetch-json>
@@ -40,11 +20,12 @@
 
 <script>
 import FetchJson from "./assets/js/components/FetchJson"
+import ContactList from "./assets/js/components/ContactList"
 
 export default {
   name: "App",
 
-  components: { FetchJson }
+  components: { FetchJson, ContactList }
 }
 </script>
 
