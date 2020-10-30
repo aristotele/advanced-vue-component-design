@@ -3,10 +3,13 @@
     <div class="max-w-sm mx-auto">
       <div class="flex justify-center pt-8">
         <fetch-json url="/contacts.json">
-          <template slot-scope="{ json: contacts }">
+          <template slot-scope="{ json: contacts, loading }">
             <div class="card">
               <h1 class="text-2xl font-bold mb-6">Your Contacts</h1>
-              <div>
+              <div v-if="loading">
+                Loading ...
+              </div>
+              <div v-else>
                 <div
                   v-for="contact in contacts"
                   :key="contact.id"

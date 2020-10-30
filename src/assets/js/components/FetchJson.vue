@@ -3,19 +3,26 @@ export default {
   props: ["url"],
   data() {
     return {
-      json: []
+      json: null,
+      loading: true
     }
   },
 
   created() {
     fetch(this.url)
       .then(response => response.json())
-      .then(json => (this.json = json))
+      .then(json => {
+        setTimeout(() => {
+          this.json = json
+          this.loading = false
+        }, 1500)
+      })
   },
 
   render() {
     return this.$scopedSlots.default({
-      json: this.json
+      json: this.json,
+      loading: this.loading
     })
   }
 }
