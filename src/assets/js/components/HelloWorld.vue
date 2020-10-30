@@ -7,17 +7,21 @@ export default {
   },
 
   render(createElement) {
-    return createElement(
-      "ul",
-      {},
-      this.contacts.map(contact => {
-        return createElement(
-          "li",
-          {},
-          `${contact.name.first} ${contact.name.last}`
-        )
-      })
-    )
+    // parent wrapper <div> with array of children [<h1>, <ul>]
+    return createElement("div", {}, [
+      createElement("h1", {}, "My ugly header"),
+      createElement(
+        "ul",
+        {},
+        this.contacts.map(contact => {
+          return createElement(
+            "li",
+            {},
+            `${contact.name.first} ${contact.name.last}`
+          )
+        })
+      )
+    ])
   }
 }
 </script>
