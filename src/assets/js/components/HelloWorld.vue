@@ -1,23 +1,17 @@
+<template>
+  <ul>
+    <li v-for="contact in contacts" :key="contact.id">
+      {{ contact.name.first }} {{ contact.name.last }}
+    </li>
+  </ul>
+</template>
+
 <script>
-import ToggleInput from "./ToggleInput"
+import contacts from "../../../../static/contacts.json"
 
 export default {
   data() {
-    return {
-      isToggled: true
-    }
-  },
-
-  render(createElement) {
-    // By declaring the prop 'value' and 'input' event we're simulating v-model in the render function
-    return createElement(ToggleInput, {
-      props: {
-        value: this.isToggled
-      },
-      on: {
-        input: newValue => (this.isToggled = newValue)
-      }
-    })
+    return { contacts }
   }
 }
 </script>
