@@ -1,14 +1,44 @@
 <template>
   <div class="min-h-screen bg-grey-darker p-8">
-    <div class="max-w-sm mx-auto"></div>
+    <div class="max-w-sm mx-auto card mt-8">
+      <label class="form-label mb-2">Renderless</label>
+
+      <renderless-tag-input>
+        <template slot-scope="{}">
+          <div class="tag-input">
+            <span class="tag-input-tag">
+              <span>Sample tag</span>
+              <button type="button" class="tag-input-remove">
+                &times;
+              </button>
+            </span>
+            <input class="tag-input-text" placeholder="Add tag..." />
+          </div>
+        </template>
+      </renderless-tag-input>
+    </div>
+
+    <div class="max-w-sm mx-auto card mt-8">
+      <label class="form-label mb-2">Original</label>
+      <tag-input v-model="tags"></tag-input>
+    </div>
   </div>
 </template>
 
 <script>
+import TagInput from "./assets/js/components/TagInput"
+import RenderlessTagInput from "./assets/js/components/RenderlessTagInput"
+
 export default {
   name: "App",
 
-  components: {}
+  components: { TagInput, RenderlessTagInput },
+
+  data() {
+    return {
+      tags: ["awesome", "magnific", "super"]
+    }
+  }
 }
 </script>
 
