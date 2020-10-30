@@ -8,7 +8,12 @@ export default {
           class: "text-lg text-blue font-bold"
         }
       },
-      [this.$slots.default]
+      [
+        this.$scopedSlots.default({
+          myProperty: "Bitch",
+          anotherProp: "You are a"
+        })
+      ]
     )
   }
 }
