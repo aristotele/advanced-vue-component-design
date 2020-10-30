@@ -2,8 +2,8 @@
   <div class="min-h-screen bg-grey-darker p-8">
     <div class="max-w-sm mx-auto">
       <div class="flex justify-center pt-8">
-        <contact-list>
-          <template slot-scope="{ contacts }">
+        <fetch-json url="/contacts.json">
+          <template slot-scope="{ json: contacts }">
             <div class="card">
               <h1 class="text-2xl font-bold mb-6">Your Contacts</h1>
               <div>
@@ -29,19 +29,19 @@
               </div>
             </div>
           </template>
-        </contact-list>
+        </fetch-json>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ContactList from "./assets/js/components/ContactList"
+import FetchJson from "./assets/js/components/FetchJson"
 
 export default {
   name: "App",
 
-  components: { ContactList }
+  components: { FetchJson }
 }
 </script>
 

@@ -1,20 +1,21 @@
 <script>
 export default {
+  props: ["url"],
   data() {
     return {
-      contacts: []
+      json: []
     }
   },
 
   created() {
-    fetch("/contacts.json")
+    fetch(this.url)
       .then(response => response.json())
-      .then(contacts => (this.contacts = contacts))
+      .then(json => (this.json = json))
   },
 
   render() {
     return this.$scopedSlots.default({
-      contacts: this.contacts
+      json: this.json
     })
   }
 }
