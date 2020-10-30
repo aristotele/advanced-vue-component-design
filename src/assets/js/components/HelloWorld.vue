@@ -1,20 +1,18 @@
 <script>
 export default {
-  render(createElement) {
-    return createElement(
-      "h1",
-      {
-        attrs: {
-          class: "text-lg text-blue font-bold"
-        }
-      },
-      [
-        this.$scopedSlots.default({
-          myProperty: "Bitch",
-          anotherProp: "You are a"
-        })
-      ]
+  render() {
+    // is a VNode, so we can return it, directly in the render function
+    console.log(
+      this.$scopedSlots.default({
+        myProperty: "Bitch",
+        anotherProp: "You are a"
+      })
     )
+
+    return this.$scopedSlots.default({
+      myProperty: "Bitch",
+      anotherProp: "You are a"
+    })
   }
 }
 </script>
