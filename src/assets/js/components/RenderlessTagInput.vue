@@ -1,17 +1,47 @@
 <script>
 export default {
   model: {
-    prop: "tags"
+    prop: "tags",
+    event: "update"
   },
 
   props: ["tags"],
 
+  data() {
+    return {
+      input: ""
+    }
+  },
+
+  computed: {
+    newTag() {
+      return this.input.trim()
+    }
+  },
+
   methods: {
+    addTag() {
+      if (this.newTag.length === 0 || this.tags.includes(this.newTag)) {
+        return
+      }
+      this.$emit("update", [...this.tags, this.newTag])
+      this.clearInput()
+    },
+
     removeTag(tag) {
       this.$emit(
-        "input",
+        "update",
         this.tags.filter(t => t !== tag)
       )
+    },
+
+    clearInput() {
+      this.input = ""
+    },
+
+    // @input event listener for <input type="text" />
+    onInput(e) {
+      this.input = e.target.value
     }
   },
 
@@ -22,7 +52,13 @@ export default {
       tags: this.tags,
 
       // 2. action prop
-      removeTag: this.removeTag
+      removeTag: this.removeTag,
+
+      addTag: this.addTag,
+
+      inputValue: this.newTag,
+
+      onInput: this.onInput
     })
   }
 }

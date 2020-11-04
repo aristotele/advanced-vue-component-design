@@ -4,7 +4,7 @@
       <label class="form-label mb-2">Renderless</label>
 
       <renderless-tag-input v-model="tags">
-        <template slot-scope="{ tags, removeTag }">
+        <template slot-scope="{ tags, removeTag, inputValue, onInput, addTag }">
           <div class="tag-input">
             <span v-for="tag in tags" :key="tag" class="tag-input-tag">
               <span>{{ tag }}</span>
@@ -16,7 +16,13 @@
                 &times;
               </button>
             </span>
-            <input class="tag-input-text" placeholder="Add tag..." />
+            <input
+              :value="inputValue"
+              @input="onInput"
+              class="tag-input-text"
+              placeholder="Add tag..."
+              @keydown.enter.prevent="addTag"
+            />
           </div>
         </template>
       </renderless-tag-input>
