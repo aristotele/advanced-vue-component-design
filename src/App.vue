@@ -4,14 +4,21 @@
       <label class="form-label mb-2">Renderless</label>
 
       <renderless-tag-input v-model="tags">
-        <template slot-scope="{ tags, removeTag, inputProps, inputEvents }">
+        <template
+          slot-scope="{ tags, removeButtonEvent, inputProps, inputEvents }"
+        >
           <div class="tag-input">
             <span v-for="tag in tags" :key="tag" class="tag-input-tag">
               <span>{{ tag }}</span>
+
+              <!--
+                in this case the 'binding-prop' need some context that only the parent knows about
+                so we make removeButtonEvent in the renderless component a function which accept an argument and return an object
+                -->
               <button
                 type="button"
                 class="tag-input-remove"
-                @click="removeTag(tag)"
+                v-on="removeButtonEvent(tag)"
               >
                 &times;
               </button>

@@ -77,6 +77,17 @@ export default {
             this.addTag()
           }
         }
+      },
+
+      // now removeButtonEvent is a function that return an object
+      // this way we can accept argument from the consumer
+      removeButtonEvent: tag => {
+        return {
+          click: () => {
+            console.log(tag)
+            this.removeTag(tag)
+          }
+        }
       }
     })
   }
