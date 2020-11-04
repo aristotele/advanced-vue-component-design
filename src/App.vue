@@ -3,11 +3,11 @@
     <div class="max-w-sm mx-auto card mt-8">
       <label class="form-label mb-2">Renderless</label>
 
-      <renderless-tag-input>
-        <template slot-scope="{}">
+      <renderless-tag-input :tags="tags">
+        <template slot-scope="{ tags }">
           <div class="tag-input">
-            <span class="tag-input-tag">
-              <span>Sample tag</span>
+            <span v-for="tag in tags" :key="tag" class="tag-input-tag">
+              <span>{{ tag }}</span>
               <button type="button" class="tag-input-remove">
                 &times;
               </button>

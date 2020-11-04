@@ -24,6 +24,7 @@ export default {
   },
 
   props: ["tags"],
+
   data() {
     return {
       input: ""
