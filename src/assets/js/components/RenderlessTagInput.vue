@@ -9,17 +9,24 @@ export default {
 
   data() {
     return {
-      input: ""
+      inputValue: ""
     }
   },
 
   computed: {
     newTag() {
-      return this.input.trim()
+      return this.inputValue.trim()
     }
   },
 
   methods: {
+    removeTag(tag) {
+      this.$emit(
+        "update",
+        this.tags.filter(t => t !== tag)
+      )
+    },
+
     addTag() {
       if (this.newTag.length === 0 || this.tags.includes(this.newTag)) {
         return
@@ -28,20 +35,14 @@ export default {
       this.clearInput()
     },
 
-    removeTag(tag) {
-      this.$emit(
-        "update",
-        this.tags.filter(t => t !== tag)
-      )
-    },
-
     clearInput() {
-      this.input = ""
+      this.inputValue = ""
     },
 
-    // @input event listener for <input type="text" />
-    onInput(e) {
-      this.input = e.target.value
+    handleBackspace() {
+      if (this.newTag.length === 0) {
+        this.$emit("update", this.tags.slice(0, -1))
+      }
     }
   },
 
@@ -56,9 +57,27 @@ export default {
 
       addTag: this.addTag,
 
-      inputValue: this.newTag,
+      // 3. binding props
+      inputProps: {
+        value: this.inputValue
+      },
 
-      onInput: this.onInput
+      inputEvents: {
+        input: e => {
+          this.inputValue = e.target.value
+        },
+
+        keydown: e => {
+          if (e.key === "Backspace") {
+            this.handleBackspace()
+          }
+
+          if (e.keyCode === 13) {
+            e.preventDefault()
+            this.addTag()
+          }
+        }
+      }
     })
   }
 }

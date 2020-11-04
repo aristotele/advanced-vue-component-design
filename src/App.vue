@@ -4,7 +4,7 @@
       <label class="form-label mb-2">Renderless</label>
 
       <renderless-tag-input v-model="tags">
-        <template slot-scope="{ tags, removeTag, inputValue, onInput, addTag }">
+        <template slot-scope="{ tags, removeTag, inputProps, inputEvents }">
           <div class="tag-input">
             <span v-for="tag in tags" :key="tag" class="tag-input-tag">
               <span>{{ tag }}</span>
@@ -16,12 +16,18 @@
                 &times;
               </button>
             </span>
+            <!--
+              How it works?
+              https://vuejs.org/v2/guide/components-props.html#Passing-the-Properties-of-an-Object
+              It's the same as writing
+              :value="inputProps.value"
+              but with only v-bind="obj" -> all object key will be translated to v-bind:objKey="obj.objKey"
+              -->
             <input
-              :value="inputValue"
-              @input="onInput"
+              v-bind="inputProps"
+              v-on="inputEvents"
               class="tag-input-text"
               placeholder="Add tag..."
-              @keydown.enter.prevent="addTag"
             />
           </div>
         </template>
