@@ -1,5 +1,9 @@
 <script>
 export default {
+  model: {
+    prop: "tags"
+  },
+
   props: ["tags"],
 
   // 3 slot-prop category

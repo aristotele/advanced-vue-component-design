@@ -3,10 +3,7 @@
     <div class="max-w-sm mx-auto card mt-8">
       <label class="form-label mb-2">Renderless</label>
 
-      <renderless-tag-input
-        :tags="tags"
-        @input="newTagsArray => (tags = newTagsArray)"
-      >
+      <renderless-tag-input v-model="tags">
         <template slot-scope="{ tags }">
           <div class="tag-input">
             <span v-for="tag in tags" :key="tag" class="tag-input-tag">
