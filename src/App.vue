@@ -4,11 +4,15 @@
       <label class="form-label mb-2">Renderless</label>
 
       <renderless-tag-input v-model="tags">
-        <template slot-scope="{ tags }">
+        <template slot-scope="{ tags, removeTag }">
           <div class="tag-input">
             <span v-for="tag in tags" :key="tag" class="tag-input-tag">
               <span>{{ tag }}</span>
-              <button type="button" class="tag-input-remove">
+              <button
+                type="button"
+                class="tag-input-remove"
+                @click="removeTag(tag)"
+              >
                 &times;
               </button>
             </span>
