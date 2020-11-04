@@ -1,6 +1,27 @@
 <template>
   <div class="min-h-screen bg-grey-darker p-8">
     <div class="max-w-sm mx-auto card mt-8">
+      <label class="form-label mb-2">Renderless Stacked Layout</label>
+
+      <renderless-tag-input>
+        <div class="stacked-tag-input">
+          <div class="stacked-tag-input-form">
+            <input class="form-input" placeholder="Add tag..." />
+            <button class="btn btn-indigo">Add Tag</button>
+          </div>
+          <ul class="stacked-tag-list">
+            <li>
+              sample
+              <button type="button" class="stacked-tag-link">
+                Remove
+              </button>
+            </li>
+          </ul>
+        </div>
+      </renderless-tag-input>
+    </div>
+
+    <div class="max-w-sm mx-auto card mt-8">
       <label class="form-label mb-2">Renderless</label>
 
       <renderless-tag-input v-model="tags">
