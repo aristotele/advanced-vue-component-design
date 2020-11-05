@@ -10,7 +10,7 @@ export default {
   // It is used to pass data to all children (no matter how much nested)
   provide() {
     return {
-      activeItem: this.activeItem
+      sharedState: this.sharedState
     }
   },
 
@@ -18,7 +18,9 @@ export default {
   // The solution is to wrap 'activeItem' in an obj which will be automatically treated as reactive with provide/inject https://blog.logrocket.com/how-to-make-provide-inject-reactive/
   data() {
     return {
-      activeItem: 1
+      sharedState: {
+        activeItem: 1
+      }
     }
   }
 }

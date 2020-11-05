@@ -22,14 +22,14 @@
 <script>
 export default {
   // 'inject' recall the data passed from the parent with 'provide'
-  inject: ["activeItem"],
+  inject: ["sharedState"],
 
   // itemId allow to track the active item
   props: ["itemId"],
 
   computed: {
     currentItem() {
-      return this.activeItem
+      return this.sharedState.activeItem
     }
   },
 
