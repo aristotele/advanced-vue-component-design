@@ -4,7 +4,7 @@
       <slot name="header"></slot>
       <svg
         class="icon"
-        :class="{ 'rotate-90': false }"
+        :class="{ 'rotate-90': isActive }"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
       >
@@ -13,7 +13,7 @@
         />
       </svg>
     </div>
-    <div class="accordion-item-body" v-show="false">
+    <div class="accordion-item-body" v-show="isActive">
       <slot name="content"></slot>
     </div>
   </div>
@@ -28,14 +28,15 @@ export default {
   props: ["itemId"],
 
   computed: {
-    currentItem() {
-      return this.sharedState.activeItem
+    isActive() {
+      return this.sharedState.activeItem === this.itemId
     }
   },
 
   methods: {
     toggle() {
-      //
+      // make the current item active
+      this.sharedState.activeItem = this.isActive ? null : this.itemId
     }
   }
 }
