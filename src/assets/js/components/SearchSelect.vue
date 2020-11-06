@@ -11,12 +11,24 @@
     </button>
 
     <div class="search-select-dropdown" v-show="isOpen">
-      <input v-model="search" ref="search" class="search-select-search" />
-      <ul v-show="filteredOptions.length > 0" class="search-select-options">
+      <input
+        v-model="search"
+        ref="search"
+        class="search-select-search"
+        @keydown.esc="close"
+        @keydown.up="highlightPrev"
+        @keydown.down="highlightNext"
+      />
+      <ul
+        v-show="filteredOptions.length > 0"
+        class="search-select-options"
+        ref="options"
+      >
         <li
-          v-for="option in filteredOptions"
+          v-for="(option, i) in filteredOptions"
           :key="option"
           class="search-select-option"
+          :class="{ 'is-active': i === highlightedIndex }"
           @click="select(option)"
         >
           {{ option }}
@@ -37,7 +49,8 @@ export default {
   data() {
     return {
       isOpen: false,
-      search: ""
+      search: "",
+      highlightedIndex: 0
     }
   },
 
@@ -75,6 +88,30 @@ export default {
       this.$emit("input", option)
       this.clearSearchInput()
       this.close()
+    },
+
+    highlightPrev() {
+      this.highlightedIndex = this.highlightedIndex - 1
+
+      if (this.highlightedIndex < 0) {
+        this.highlightedIndex = this.filteredOptions.length - 1
+      }
+
+      this.$refs.options.children[this.highlightedIndex].scrollIntoView({
+        block: "nearest"
+      })
+    },
+
+    highlightNext() {
+      this.highlightedIndex = this.highlightedIndex + 1
+
+      if (this.highlightedIndex > this.filteredOptions.length - 1) {
+        this.highlightedIndex = 0
+      }
+
+      this.$refs.options.children[this.highlightedIndex].scrollIntoView({
+        block: "nearest"
+      })
     }
   }
 }
