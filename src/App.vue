@@ -3,7 +3,11 @@
     <div class="max-w-sm mx-auto card mt-8">
       <div class="mb-4">
         <label class="form-label mb-2">Favorite Thrash Band</label>
-        <search-select v-model="selectedBand" :options="bands"></search-select>
+        <search-select
+          v-model="selectedBand"
+          :options="bands"
+          :filter-function="basicFiltering"
+        ></search-select>
       </div>
       <div class="text-right">
         <button type="button" class="btn btn-blue">Save Changes</button>
@@ -38,6 +42,14 @@ export default {
         "Slayer",
         "Testament"
       ]
+    }
+  },
+
+  methods: {
+    basicFiltering(search, options) {
+      return options.filter(option => {
+        return option.toLowerCase().startsWith(search.toLowerCase())
+      })
     }
   }
 }

@@ -32,7 +32,7 @@
 
 <script>
 export default {
-  props: ["value", "options"],
+  props: ["value", "options", "filterFunction"],
 
   data() {
     return {
@@ -41,11 +41,16 @@ export default {
     }
   },
 
+  mounted() {
+    console.log(this.filterFunction)
+  },
+
   computed: {
     filteredOptions() {
-      return this.options.filter(option => {
-        return option.toLowerCase().startsWith(this.search.toLowerCase())
-      })
+      // We've passed the function declaration (the logic we would like to execute for filtering)
+      // as a prop, so we just need to invoke it, passing as parameter the local's component data
+      // here we 'decide' the api, meaning the order of parameters; the parent must adhere to this order
+      return this.filterFunction(this.search, this.options)
     }
   },
 
