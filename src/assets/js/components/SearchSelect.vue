@@ -18,6 +18,8 @@
         @keydown.esc="close"
         @keydown.up="highlightPrev"
         @keydown.down="highlightNext"
+        @keydown.enter.prevent="selectHighlighted"
+        @keydown.tab.prevent
       />
       <ul
         v-show="filteredOptions.length > 0"
@@ -69,9 +71,20 @@ export default {
 
   methods: {
     open() {
+      if (this.isOpen) {
+        return
+      }
+
       this.isOpen = true
       this.$nextTick(() => {
         this.$refs.search.focus()
+        this.scrollToHighlighted()
+      })
+    },
+
+    scrollToHighlighted() {
+      this.$refs.options.children[this.highlightedIndex].scrollIntoView({
+        block: "nearest"
       })
     },
 
@@ -87,7 +100,12 @@ export default {
     select(option) {
       this.$emit("input", option)
       this.clearSearchInput()
+      this.highlightedIndex = 0
       this.close()
+    },
+
+    selectHighlighted() {
+      this.select(this.filteredOptions[this.highlightedIndex])
     },
 
     highlight(index) {
@@ -101,9 +119,7 @@ export default {
         this.highlightedIndex = 0
       }
 
-      this.$refs.options.children[this.highlightedIndex].scrollIntoView({
-        block: "nearest"
-      })
+      this.scrollToHighlighted()
     },
 
     highlightPrev() {
