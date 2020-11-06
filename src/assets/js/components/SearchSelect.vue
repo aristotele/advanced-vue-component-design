@@ -90,20 +90,12 @@ export default {
       this.close()
     },
 
-    highlightPrev() {
-      this.highlightedIndex = this.highlightedIndex - 1
+    highlight(index) {
+      this.highlightedIndex = index
 
       if (this.highlightedIndex < 0) {
         this.highlightedIndex = this.filteredOptions.length - 1
       }
-
-      this.$refs.options.children[this.highlightedIndex].scrollIntoView({
-        block: "nearest"
-      })
-    },
-
-    highlightNext() {
-      this.highlightedIndex = this.highlightedIndex + 1
 
       if (this.highlightedIndex > this.filteredOptions.length - 1) {
         this.highlightedIndex = 0
@@ -112,6 +104,14 @@ export default {
       this.$refs.options.children[this.highlightedIndex].scrollIntoView({
         block: "nearest"
       })
+    },
+
+    highlightPrev() {
+      this.highlight(this.highlightedIndex - 1)
+    },
+
+    highlightNext() {
+      this.highlight(this.highlightedIndex + 1)
     }
   }
 }
