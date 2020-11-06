@@ -32,26 +32,12 @@
 
 <script>
 export default {
+  props: ["value", "options"],
+
   data() {
     return {
       isOpen: false,
-      value: "Destruction",
-      search: "",
-      options: [
-        "Anthrax",
-        "Dark Angel",
-        "Death Angel",
-        "Destruction",
-        "Exodus",
-        "Flotsam and Jetsam",
-        "Kreator",
-        "Megadeth",
-        "Metallica",
-        "Overkill",
-        "Sepultura",
-        "Slayer",
-        "Testament"
-      ]
+      search: ""
     }
   },
 
@@ -81,7 +67,7 @@ export default {
     },
 
     select(option) {
-      this.value = option
+      this.$emit("input", option)
       this.clearSearchInput()
       this.close()
     }
