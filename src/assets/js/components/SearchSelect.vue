@@ -11,7 +11,7 @@
         <span v-else class="search-select-placeholder">Select a band...</span>
       </button>
 
-      <div class="search-select-dropdown" v-show="isOpen">
+      <div class="search-select-dropdown w-100" v-show="isOpen" ref="dropdown">
         <input
           v-model="search"
           ref="search"
@@ -48,6 +48,7 @@
 
 <script>
 import ClickOutside from "./ClickOutside"
+import { createPopper } from "@popperjs/core"
 
 export default {
   props: ["value", "options", "filterFunction"],
@@ -61,9 +62,8 @@ export default {
       highlightedIndex: 0
     }
   },
-
-  mounted() {
-    console.log(this.filterFunction)
+  beforeDestroy() {
+    this.popper.destroy()
   },
 
   computed: {
@@ -83,9 +83,44 @@ export default {
 
       this.isOpen = true
       this.$nextTick(() => {
+        this.setupPopper()
         this.$refs.search.focus()
         this.scrollToHighlighted()
       })
+    },
+
+    setupPopper() {
+      // custom modifier, solution borrowed from https://github.com/popperjs/popper-core/issues/794
+      const sameWidth = {
+        name: "sameWidth",
+        enabled: true,
+        fn: ({ state }) => {
+          // console.log(state)
+          state.styles.popper.width = `${state.rects.reference.width}px`
+        },
+        phase: "beforeWrite",
+        requires: ["computeStyles"]
+      }
+
+      if (this.popper === undefined) {
+        console.log("creating")
+        this.popper = createPopper(this.$refs.button, this.$refs.dropdown, {
+          placement: "bottom",
+          modifiers: [
+            {
+              // this modifier allow to put 5px of offset from related element
+              name: "offset",
+              options: {
+                offset: [0, 5]
+              }
+            },
+            sameWidth
+          ]
+        })
+      } else {
+        console.log("re-using")
+        this.popper.update()
+      }
     },
 
     scrollToHighlighted() {

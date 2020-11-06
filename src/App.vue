@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen bg-grey-darker p-8">
-    <div class="max-w-sm mx-auto card mt-8">
+    <div class="max-w-sm mx-auto card mt-8" style="margin-top: 200px;">
       <div class="mb-4">
         <label class="form-label mb-2">Favorite Thrash Band</label>
         <search-select
